@@ -1,0 +1,22 @@
+{
+  "name": "InContent-Stylesheet-Unification",
+  "version": "0.0.0",
+  "authors": [
+    "Valentin Tsatskin <vtsatskin@mozilla.com>"
+  ],
+  "description": "Unifying Firefox's in-content stylesheets",
+  "license": "MPL 2.0",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.0",
+    "normalize-css": "~3.0.1",
+    "jquery-details": "~0.1.0"
+  }
+}

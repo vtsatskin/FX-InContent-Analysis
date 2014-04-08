@@ -1,7 +1,33 @@
-@import url(normalize.css);
+@import url(bower_components/normalize-css/normalize.css);
 
 .content {
     color: #4B4B4B;
     margin: auto;
     max-width: 768px;
+}
+
+details {
+    margin-bottom: 1em;
+}
+
+details > h2 {
+    border-bottom: 1px dotted #4B4B4B;
+    cursor: pointer;
+}
+
+summary:before {
+    display: inline-block;
+    -moz-margin-end: 0.5em;
+}
+
+details > summary:before {
+    content: "\25b6";
+}
+
+details.open > summary:before {
+    content: "\25bc";
+}
+
+summary > h2 {
+    display: inline;
 }

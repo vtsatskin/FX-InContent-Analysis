@@ -308,6 +308,8 @@ document.addEventListener('DOMContentLoaded', function() {
     renderStylesheets(stylesheets);
 
     renderPages(data.pages);
+
+    $('details').details();
 });
 
 function generateStylesheets() {
