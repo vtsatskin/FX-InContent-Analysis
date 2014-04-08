@@ -1,0 +1,7 @@
+@import url(normalize.css);
+
+.content {
+    color: #4B4B4B;
+    margin: auto;
+    max-width: 768px;
+}
