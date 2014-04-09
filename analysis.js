@@ -306,10 +306,14 @@ var data = {
       description: "Provides in-content UI with styles",
       osDependant: true,
     },
+    "chrome://global/skin/global.css": {
+      description: "Global styles",
+      osDependant: true,
+    },
     "chrome://global/locale/intl.css": {
       description: "Locale specific styles. Imported by global.css.",
       osDependant: false,
-    }
+    },
   }
 };
 
