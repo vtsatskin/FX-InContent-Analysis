@@ -300,7 +300,13 @@ var data = {
         "chrome://browser/content/feeds/subscribe.css",
       ],
     },
-  ]
+  ],
+  stylesheets: {
+    "chrome://global/skin/inContentUI.css": {
+      description: "Provides in-content UI with styles",
+      osDependant: true,
+    },
+  }
 };
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -337,6 +343,20 @@ function renderStylesheets(stylesheets) {
         heading.textContent = name;
         heading.id = 'style-' + name;
 
+        var description = document.createElement("p");
+        var osDependant = document.createElement("p");
+
+        if(data.stylesheets[name]) {
+          description.textContent = data.stylesheets[name].description;
+
+          var strong = document.createElement("strong");
+          strong.textContent = "OS Variant: ";
+          osDependant.appendChild(strong);
+          var text = document.createTextNode(data.stylesheets[name].osDependant);
+          osDependant.appendChild(strong);
+          osDependant.appendChild(text);
+        }
+
         var ul = document.createElement("ul");
         stylesheets[name].forEach(function(page) {
             var li = document.createElement("li");
@@ -350,6 +370,8 @@ function renderStylesheets(stylesheets) {
         });
 
         stylesheetsEle.appendChild(heading);
+        stylesheetsEle.appendChild(description);
+        stylesheetsEle.appendChild(osDependant);
         stylesheetsEle.appendChild(ul);
     });
 
