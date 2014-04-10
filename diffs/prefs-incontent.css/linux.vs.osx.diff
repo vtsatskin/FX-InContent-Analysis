@@ -1,0 +1,187 @@
+diff --git a/Users/vt/Code/Internal/mozilla-central/browser/themes/linux/preferences/in-content/preferences.css b/Users/vt/Code/internal/mozilla-central/browser/themes/osx/preferences/in-content/preferences.css
+index c79fadb..997e482 100644
+--- a/Users/vt/Code/Internal/mozilla-central/browser/themes/linux/preferences/in-content/preferences.css
++++ b/Users/vt/Code/internal/mozilla-central/browser/themes/osx/preferences/in-content/preferences.css
+@@ -4,87 +4,132 @@
+ 
+ %include ../../../shared/in-content/preferences.css
+ 
+-button > .button-box,
+-menulist > .menulist-label-box {
++menulist:not([editable="true"]) > .menulist-dropmarker {
++  display: -moz-box;
++  margin-top: 1px;
++  margin-bottom: 1px;
++}
++
++checkbox:hover::before,
++checkbox[checked]::before {
++  margin-bottom: -2px;
++  -moz-margin-end: -20px;
++  -moz-margin-start: 5px;
++}
++
++radio:hover::before,
++radio[selected]::before {
++  -moz-margin-end: -18px;
++  -moz-margin-start: 7px;
++}
++
++.numberbox-input-box {
+   -moz-appearance: none;
++  border-width: 0;
+ }
+ 
+-button[type="menu"] > .button-box > .button-menu-dropmarker {
+-  -moz-appearance: none !important;
++spinbuttons {
++  -moz-appearance: none;
+ }
+ 
+-menulist:not([editable="true"]) > .menulist-dropmarker {
+-  display: -moz-box;
+-  margin-top: 6px;
+-  margin-bottom: 6px;
++.spinbuttons-up {
++  margin-top: 0 !important;
++  border-radius: 4px 4px 0 0;
++}
++
++.spinbuttons-down  {
++  margin-bottom: 0 !important;
++  border-radius: 0 0 4px 4px;
+ }
+ 
+-checkbox {
+-  -moz-binding: url("chrome://global/content/bindings/checkbox.xml#checkbox");
++.spinbuttons-button > .button-box {
++  -moz-padding-start: 2px !important;
++  -moz-padding-end: 3px !important;
+ }
+ 
+-.checkbox-check {
+-  max-height: 23px;
++.spinbuttons-button > .button-box > .button-text {
++  display: none;
++}
++
++.actionsMenu > .menulist-label-box > .menulist-icon {
++  margin-top: 2px;
++  -moz-margin-start: 2px;
++  -moz-margin-end: 8px !important;
++}
++
++description {
++  font-size: 1.25rem;
++  line-height: 22px;
+ }
+ 
++@media (min-resolution: 2dppx) {
+   checkbox:hover::before,
+   checkbox[checked]::before {
+-  max-height: 10px;
+-  margin-top: 7px;
+-  margin-bottom: 6px;
+-  -moz-margin-end: -19px;
+-  -moz-margin-start: 4px;
+-  background-repeat: no-repeat;
++    background-size: cover;
++    background-image: -moz-image-rect(url("chrome://browser/skin/preferences/in-content/check@2x.png"), 0, 30, 30, 0);
+   }
+ 
+-radio {
+-  -moz-binding: url("chrome://global/content/bindings/radio.xml#radio");
+-  margin: 7px 0;
++  checkbox[checked]::before {
++    background-image: -moz-image-rect(url("chrome://browser/skin/preferences/in-content/check@2x.png"), 0, 60, 30, 30);
+   }
+ 
+-.radio-check {
+-  max-height: 23px;
++  .category-icon {
++    list-style-image: url("chrome://browser/skin/preferences/in-content/icons@2x.png");
+   }
+ 
+-.radio-label-box {
+-  -moz-appearance: none;
++  #category-general > .category-icon {
++    -moz-image-region: rect(0, 48px, 48px, 0);
+   }
+ 
+-radio:hover::before,
+-radio[selected]::before {
+-  max-height: 11px;
+-  margin-top: 6px;
+-  margin-bottom: 6px;
+-  -moz-margin-end: -17px;
+-  -moz-margin-start: 6px;
++  #category-general[selected] > .category-icon {
++    -moz-image-region: rect(48px, 48px, 96px, 0);
+   }
+ 
+-.numberbox-input-box {
+-  -moz-appearance: none;
+-  border-width: 0;
++  #category-content > .category-icon {
++    -moz-image-region: rect(0, 96px, 48px, 48px);
+   }
+ 
+-spinbuttons {
+-  -moz-appearance: none;
++  #category-content[selected] > .category-icon {
++    -moz-image-region: rect(48px, 96px, 96px, 48px);
+   }
+ 
+-.actionsMenu {
+-  font-family: "Clear Sans", sans-serif;
+-  font-size: 1.25rem;
+-  line-height: 22px;
++  #category-application > .category-icon {
++    -moz-image-region: rect(0, 144px, 48px, 96px);
+   }
+ 
+-.actionsMenu > .menulist-label-box > .menulist-icon {
+-  margin-top: 1px;
+-  -moz-margin-start: 1px;
+-  -moz-margin-end: 6px;
++  #category-application[selected] > .category-icon {
++    -moz-image-region: rect(48px, 144px, 96px, 96px);
+   }
+ 
+-.actionsMenu > .menulist-label-box > .menulist-label {
+-  margin-top: 2px !important;
++  #category-privacy > .category-icon {
++    -moz-image-region: rect(0, 192px, 48px, 144px);
+   }
+ 
+-menulist.actionsMenu > .menulist-dropmarker {
+-  margin-top: 11px;
+-  margin-bottom: 11px;
++  #category-privacy[selected] > .category-icon {
++    -moz-image-region: rect(48px, 192px, 96px, 144px);
++  }
++
++  #category-security > .category-icon {
++    -moz-image-region: rect(0, 240px, 48px, 192px);
++  }
++
++  #category-security[selected] > .category-icon {
++    -moz-image-region: rect(48px, 240px, 96px, 192px);
++  }
++
++  #category-sync > .category-icon {
++    -moz-image-region: rect(0, 288px, 48px, 240px);
++  }
++
++  #category-sync[selected] > .category-icon {
++    -moz-image-region: rect(48px, 288px, 96px, 240px);
++  }
++
++  #category-advanced > .category-icon {
++    -moz-image-region: rect(0, 336px, 48px, 288px);
++  }
++
++  #category-advanced[selected] > .category-icon {
++    -moz-image-region: rect(48px, 336px, 96px, 288px);
++  }
+ }

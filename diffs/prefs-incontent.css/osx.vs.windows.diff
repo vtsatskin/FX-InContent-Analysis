@@ -1,0 +1,77 @@
+diff --git a/Users/vt/Code/Internal/mozilla-central/browser/themes/osx/preferences/in-content/preferences.css b/Users/vt/Code/internal/mozilla-central/browser/themes/windows/preferences/in-content/preferences.css
+index 997e482..abb831a 100644
+--- a/Users/vt/Code/Internal/mozilla-central/browser/themes/osx/preferences/in-content/preferences.css
++++ b/Users/vt/Code/internal/mozilla-central/browser/themes/windows/preferences/in-content/preferences.css
+@@ -5,61 +5,30 @@
+ %include ../../../shared/in-content/preferences.css
+ 
+ menulist:not([editable="true"]) > .menulist-dropmarker {
+-  display: -moz-box;
+   margin-top: 1px;
+   margin-bottom: 1px;
+ }
+ 
+ checkbox:hover::before,
+ checkbox[checked]::before {
+-  margin-bottom: -2px;
+-  -moz-margin-end: -20px;
+-  -moz-margin-start: 5px;
++  margin-bottom: -1px;
++  -moz-margin-end: -19px;
++  -moz-margin-start: 4px;
+ }
+ 
+-radio:hover::before,
+-radio[selected]::before {
+-  -moz-margin-end: -18px;
+-  -moz-margin-start: 7px;
+-}
+-
+-.numberbox-input-box {
+-  -moz-appearance: none;
+-  border-width: 0;
+-}
+-
+-spinbuttons {
+-  -moz-appearance: none;
+-}
+-
+-.spinbuttons-up {
+-  margin-top: 0 !important;
+-  border-radius: 4px 4px 0 0;
++radio {
++  -moz-binding: url("chrome://global/content/bindings/radio.xml#radio");
++  margin: 7px 0;
+ }
+ 
+-.spinbuttons-down  {
+-  margin-bottom: 0 !important;
+-  border-radius: 0 0 4px 4px;
+-}
+-
+-.spinbuttons-button > .button-box {
+-  -moz-padding-start: 2px !important;
+-  -moz-padding-end: 3px !important;
+-}
+-
+-.spinbuttons-button > .button-box > .button-text {
+-  display: none;
++radio:hover::before,
++radio[selected]::before {
++  -moz-margin-end: -17px;
++  -moz-margin-start: 6px;
+ }
+ 
+ .actionsMenu > .menulist-label-box > .menulist-icon {
+-  margin-top: 2px;
+-  -moz-margin-start: 2px;
+-  -moz-margin-end: 8px !important;
+-}
+-
+-description {
+-  font-size: 1.25rem;
+-  line-height: 22px;
++  -moz-margin-end: 9px;
+ }
+ 
+ @media (min-resolution: 2dppx) {

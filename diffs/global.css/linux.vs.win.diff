@@ -1,0 +1,227 @@
+diff --git a/Users/vt/Code/Internal/mozilla-central/toolkit/themes/linux/global/global.css b/Users/vt/Code/internal/mozilla-central/toolkit/themes/windows/global/global.css
+index 0881566..8c551d0 100644
+--- a/Users/vt/Code/Internal/mozilla-central/toolkit/themes/linux/global/global.css
++++ b/Users/vt/Code/internal/mozilla-central/toolkit/themes/windows/global/global.css
+@@ -13,12 +13,8 @@
+ 
+ /* ::::: XBL bindings ::::: */
+ 
+-checkbox {
+-  -moz-binding: url("chrome://global/content/bindings/checkbox.xml#checkbox-with-spacing");
+-}
+-
+ radio {
+-  -moz-binding: url("chrome://global/skin/globalBindings.xml#radio-with-spacing");
++  -moz-binding: url("chrome://global/skin/globalBindings.xml#radio");
+ }
+ 
+ menulist > menupopup,
+@@ -30,14 +26,6 @@ menulist > menupopup,
+   -moz-binding: url("chrome://global/skin/globalBindings.xml#menulist-compact");
+ }
+ 
+-progressmeter[mode="undetermined"] {
+-  -moz-binding: url("chrome://global/content/bindings/progressmeter.xml#progressmeter-undetermined");
+-}
+-
+-toolbar[type="menubar"]:not([autohide="true"]):not(:-moz-lwtheme):-moz-system-metric(menubar-drag) {
+-  -moz-binding: url("chrome://global/content/bindings/toolbar.xml#toolbar-drag");
+-}
+-
+ /* ::::: root elements ::::: */
+ 
+ window,
+@@ -61,24 +49,28 @@ window.dialog {
+ 
+ /* ::::: alert icons :::::*/
+ 
++.message-icon,
++.alert-icon,
++.error-icon,
++.question-icon {
++  width: 32px;
++  height: 32px;
++}
++
+ .message-icon {
+-  list-style-image: url("moz-icon://stock/gtk-dialog-info?size=dialog");
++  list-style-image: url("chrome://global/skin/icons/information-32.png");
+ }
+ 
+ .alert-icon {
+-  list-style-image: url("moz-icon://stock/gtk-dialog-warning?size=dialog");
++  list-style-image: url("chrome://global/skin/icons/Warning.png");
+ }
+ 
+ .error-icon {
+-  list-style-image: url("moz-icon://stock/gtk-dialog-error?size=dialog");
++  list-style-image: url("chrome://global/skin/icons/Error.png");
+ }
+ 
+ .question-icon {
+-  list-style-image: url("moz-icon://stock/gtk-dialog-question?size=dialog");
+-}
+-
+-.authentication-icon {
+-  list-style-image: url("chrome://global/skin/icons/Authentication.png");
++  list-style-image: url("chrome://global/skin/icons/Question.png");
+ }
+ 
+ /* ::::: iframe ::::: */
+@@ -114,6 +106,13 @@ statusbarpanel {
+   padding: 0 4px;
+ }
+ 
++statusbarpanel:not(.statusbar-resizerpanel):-moz-lwtheme {
++  -moz-appearance: none;
++  border-top-style: none;
++  border-bottom-style: none;
++  -moz-border-start-style: none;
++}
++
+ .statusbar-resizerpanel {
+   -moz-box-align: end;
+   -moz-box-pack: end;
+@@ -133,6 +132,9 @@ statusbarpanel {
+ sidebarheader {
+   height: 25px;
+   background-color: -moz-Dialog;
++  -moz-appearance: toolbox;
++  border-bottom: 1px solid ThreeDShadow;
++  border-top: 1px solid ThreeDHighlight;
+ }
+ 
+ sidebarheader > label {
+@@ -151,15 +153,10 @@ toolbar[mode="text"] .toolbarbutton-text {
+ /* ::::: miscellaneous formatting ::::: */
+ 
+ :root:-moz-lwtheme,
+-[lwthemefooter="true"],
+-statusbarpanel:-moz-lwtheme {
++[lwthemefooter="true"] {
+   -moz-appearance: none;
+ }
+ 
+-sidebarheader:-moz-lwtheme {
+-  background: none;
+-}
+-
+ :root:-moz-lwtheme-darktext {
+   text-shadow: 0 -0.5px 1.5px white;
+ }
+@@ -168,6 +165,13 @@ sidebarheader:-moz-lwtheme {
+   text-shadow: 1px 1px 1.5px black;
+ }
+ 
++statusbar:-moz-lwtheme,
++sidebarheader:-moz-lwtheme {
++  -moz-appearance: none;
++  background: none;
++  border-style: none;
++}
++
+ .inset {
+   border: 1px solid ThreeDShadow;
+   border-right-color: ThreeDHighlight;
+@@ -181,6 +185,7 @@ sidebarheader:-moz-lwtheme {
+   border-top-color: ThreeDHighlight;
+ }
+ 
++/* separators */
+ separator:not([orient="vertical"]) {
+   height: 1.5em;
+ }
+@@ -238,6 +243,11 @@ label[disabled="true"] {
+   color: GrayText;
+ }
+ 
++label[disabled="true"]:-moz-system-metric(windows-classic) {
++  color: ThreeDShadow;
++  text-shadow: 1px 1px ThreeDHighlight;
++}
++
+ .tooltip-label {
+   margin: 0;
+ }
+@@ -276,15 +286,10 @@ label[disabled="true"] {
+   text-decoration: underline;
+ }
+ 
+-.text-link:focus {
++.text-link:-moz-focusring {
+   border: 1px dotted -moz-DialogText;
+ }
+ 
+-notification > button {
+-  margin-top: 0;
+-  margin-bottom: 0;
+-}
+-
+ /* :::::: autoscroll popup ::::: */
+ 
+ .autoscroller {
+@@ -295,30 +300,59 @@ notification > button {
+   padding: 0;
+   background-image: url("chrome://global/skin/icons/autoscroll.png");
+   background-color: transparent;
++%ifdef XP_WIN
+   background-position: right top;
++%endif
+   -moz-appearance: none;
+ }
+ 
+ .autoscroller[scrolldir="NS"] {
++%ifdef XP_WIN
+   background-position: right center;
++%else
++  background-position: left center;
++%endif
+ }
+ 
+ .autoscroller[scrolldir="EW"] {
++%ifdef XP_WIN
+   background-position: right bottom;
++%else
++  background-position: left bottom;
++%endif
+ }
+ 
+ /* :::::: Close button icons ::::: */
+ 
+ .close-icon {
+-  background-image: -moz-image-rect(url("chrome://global/skin/icons/close.svg"), 0, 16, 16, 0);
+-  background-position: center center;
+-  background-repeat: no-repeat;
++  list-style-image: url("chrome://global/skin/icons/close.png");
++  -moz-image-region: rect(0, 16px, 16px, 0);
+ }
+ 
+ .close-icon:hover {
+-  background-image: -moz-image-rect(url("chrome://global/skin/icons/close.svg"), 0, 32, 16, 16);
++  -moz-image-region: rect(0, 32px, 16px, 16px);
+ }
+ 
+ .close-icon:hover:active {
+-  background-image: -moz-image-rect(url("chrome://global/skin/icons/close.svg"), 0, 48, 16, 32);
++  -moz-image-region: rect(0, 48px, 16px, 32px);
++}
++
++%ifdef XP_WIN
++@media (-moz-windows-theme: luna-blue) {
++  .close-icon {
++    list-style-image: url("chrome://global/skin/icons/close-lunaBlue.png");
++  }
++}
++
++@media (-moz-windows-theme: luna-olive) {
++  .close-icon {
++    list-style-image: url("chrome://global/skin/icons/close-lunaOlive.png");
++  }
++}
++
++@media (-moz-windows-theme: luna-silver) {
++  .close-icon {
++    list-style-image: url("chrome://global/skin/icons/close-lunaSilver.png");
++  }
+ }
++%endif

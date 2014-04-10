@@ -1,0 +1,173 @@
+diff --git a/Users/vt/Code/Internal/mozilla-central/browser/themes/linux/preferences/preferences.css b/Users/vt/Code/internal/mozilla-central/browser/themes/windows/preferences/preferences.css
+index 751a4fd..79574ee 100644
+--- a/Users/vt/Code/Internal/mozilla-central/browser/themes/linux/preferences/preferences.css
++++ b/Users/vt/Code/internal/mozilla-central/browser/themes/windows/preferences/preferences.css
+@@ -1,43 +1,42 @@
+-%if 0
+ /*
+ # -*- Mode: Java; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ # This Source Code Form is subject to the terms of the Mozilla Public
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+-%endif
+ 
+ /* Global Styles */
+ #BrowserPreferences radio[pane] {
+   list-style-image: url("chrome://browser/skin/preferences/Options.png"); 
++  padding: 5px 3px 1px;
+ }
+ 
+ radio[pane=paneMain] {
+-  -moz-image-region: rect(0px, 32px,  32px, 0px)
++  -moz-image-region: rect(0, 32px,  32px, 0);
+ }
+ 
+ radio[pane=paneTabs] {
+-  -moz-image-region: rect(0px, 64px, 32px, 32px)
++  -moz-image-region: rect(0, 64px, 32px, 32px);
+ }
+ 
+ radio[pane=paneContent] {
+-  -moz-image-region: rect(0px, 96px,  32px, 64px)
++  -moz-image-region: rect(0, 96px,  32px, 64px);
+ }
+ 
+ radio[pane=paneApplications] {
+-  -moz-image-region: rect(0px, 128px,  32px, 96px)
++  -moz-image-region: rect(0, 128px,  32px, 96px);
+ }
+ 
+ radio[pane=panePrivacy] {
+-  -moz-image-region: rect(0px, 160px,  32px, 128px)
++  -moz-image-region: rect(0, 160px,  32px, 128px);
+ }
+ 
+ radio[pane=paneSecurity] {
+-  -moz-image-region: rect(0px, 192px,  32px, 160px)
++  -moz-image-region: rect(0, 192px,  32px, 160px);
+ }
+ 
+ radio[pane=paneAdvanced] {
+-  -moz-image-region: rect(0px, 224px, 32px, 192px)
++  -moz-image-region: rect(0, 224px, 32px, 192px);
+ }
+ 
+ %ifdef MOZ_SERVICES_SYNC
+@@ -51,7 +50,7 @@ label.small {
+ }
+ 
+ #tabPrefsBox {
+-  margin: 5px;
++  margin: 6px;
+ }
+ 
+ /* Applications Pane */
+@@ -78,53 +77,47 @@ label.small {
+ /* Modeless Window Dialogs */
+ .windowDialog,
+ .windowDialog prefpane {
+-  padding: 0px;
++  padding: 0;
+ }
+ 
+ .contentPane {
+-  margin: 9px 8px 5px 8px;
++  margin: 9px 8px 5px;
+ }
+ 
+ .actionButtons {
+-  margin: 0px 3px 6px 3px !important;
++  margin: 0 3px 6px !important;
+ }
+ 
+ /* Cookies Manager */
+ #cookiesChildren::-moz-tree-image(domainCol) {
+   width: 16px;
+   height: 16px;
+-  margin: 0px 2px;
+-  list-style-image: url("chrome://mozapps/skin/places/defaultFavicon.png");
+-}
+-
+-#paneApplications {
+-  margin-left: 4px;
+-  margin-right: 4px; 
+-  padding-left: 0;
+-  padding-right: 0; 
+-}
+-
+-#linksOpenInBox {
+-  margin-top: 5px;
++  margin: 0 2px;
++  list-style-image: url("chrome://mozapps/skin/places/defaultFavicon.png") !important;
+ }
+ 
+-#paneAdvanced {
+-  padding-bottom: 10px;
+-}
+-#advancedPrefs {
+-  margin-left: 0;
+-  margin-right: 0; 
++#cookiesChildren::-moz-tree-image(domainCol, container) {
++  list-style-image: url("chrome://global/skin/icons/folder-item.png") !important;
++  -moz-image-region: rect(0, 32px, 16px, 16px);
+ }
+ 
+-#cookiesChildren::-moz-tree-image(domainCol, container) {
+-  list-style-image: url("moz-icon://stock/gtk-directory?size=menu");
++#cookiesChildren::-moz-tree-image(domainCol, container, open) {
++  -moz-image-region: rect(16px, 32px, 32px, 16px);
+ }
+ 
+ #cookieInfoBox {
+   border: 1px solid ThreeDShadow;
+-  border-radius: 0px;
++  border-radius: 0;
+   margin: 4px;
+-  padding: 0px;
++  padding: 0;
++}
++
++/* Advanced Pane */
++
++/* Adding padding-bottom prevents the bottom of the tabpanel from being cutoff
++   when browser.preferences.animateFadeIn = true */
++#advancedPrefs {
++  padding-bottom: 8px;
+ }
+ 
+ /* bottom-most box containing a groupbox in a prefpane. Prevents the bottom
+@@ -133,13 +126,6 @@ label.small {
+   padding-bottom: 4px;
+ }
+ 
+-/**
+- * Clear Private Data
+- */
+-#SanitizeDialogPane > groupbox {
+-  margin-top: 0;
+-}
+-
+ %ifdef MOZ_SERVICES_SYNC
+ /* Sync Pane */
+ 
+@@ -147,6 +133,10 @@ label.small {
+   padding: 0 8em;
+ }
+ 
++.syncGroupBox {
++  padding: 10px;
++}
++
+ #accountCaptionImage {
+   list-style-image: url("chrome://mozapps/skin/profile/profileicon.png");
+ }
+@@ -157,7 +147,7 @@ label.small {
+ }
+ 
+ #noFxaAccount {
+-  margin: 5px;
++  margin: 6px;
+   line-height: 1.2em;
+ }
+ 

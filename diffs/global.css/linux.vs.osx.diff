@@ -1,0 +1,404 @@
+diff --git a/Users/vt/Code/Internal/mozilla-central/toolkit/themes/linux/global/global.css b/Users/vt/Code/internal/mozilla-central/toolkit/themes/osx/global/global.css
+index 0881566..3812de9 100644
+--- a/Users/vt/Code/Internal/mozilla-central/toolkit/themes/linux/global/global.css
++++ b/Users/vt/Code/internal/mozilla-central/toolkit/themes/osx/global/global.css
+@@ -2,42 +2,37 @@
+  * License, v. 2.0. If a copy of the MPL was not distributed with this
+  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+ 
+-/* ===== global.css =====================================================
+-  == Styles that apply everywhere.
+-  ======================================================================= */
+-
+ /* all localizable skin settings shall live here */
+ @import url("chrome://global/locale/intl.css");
+ 
++%include shared.inc
+ @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+ 
+ /* ::::: XBL bindings ::::: */
+ 
+-checkbox {
+-  -moz-binding: url("chrome://global/content/bindings/checkbox.xml#checkbox-with-spacing");
+-}
+-
+-radio {
+-  -moz-binding: url("chrome://global/skin/globalBindings.xml#radio-with-spacing");
+-}
+-
+ menulist > menupopup,
+ .menulist-menupopup {
+   -moz-binding: url("chrome://global/content/bindings/popup.xml#popup-scrollbars");
+ }
+ 
+ .menulist-compact {
+-  -moz-binding: url("chrome://global/skin/globalBindings.xml#menulist-compact");
++  -moz-binding: url("chrome://global/content/bindings/menulist.xml#menulist-compact");
+ }
+ 
+-progressmeter[mode="undetermined"] {
+-  -moz-binding: url("chrome://global/content/bindings/progressmeter.xml#progressmeter-undetermined");
+-}
++/* ::::: draggable elements ::::: */
+ 
+-toolbar[type="menubar"]:not([autohide="true"]):not(:-moz-lwtheme):-moz-system-metric(menubar-drag) {
++toolbar:not([nowindowdrag="true"]) {
+   -moz-binding: url("chrome://global/content/bindings/toolbar.xml#toolbar-drag");
+ }
+ 
++statusbar:not([nowindowdrag="true"]) {
++  -moz-binding: url("chrome://global/content/bindings/general.xml#statusbar-drag");
++}
++
++windowdragbox {
++  -moz-binding: url("chrome://global/content/bindings/general.xml#windowdragbox");
++}
++
+ /* ::::: root elements ::::: */
+ 
+ window,
+@@ -45,12 +40,19 @@ page,
+ dialog,
+ wizard,
+ prefwindow { 
+-  -moz-appearance: window;
+-  background-color: -moz-Dialog;
++  -moz-appearance: dialog;
++  background-color: #FFFFFF;
+   color: -moz-DialogText;
+   font: message-box;
+ }
+ 
++prefwindow[type="child"] {
++  padding-top: 18px;
++  padding-bottom: 15px;
++  -moz-padding-start: 18px;
++  -moz-padding-end: 20px;
++}
++
+ /* deprecated */
+ window.dialog {
+   padding-top: 8px;
+@@ -61,24 +63,30 @@ window.dialog {
+ 
+ /* ::::: alert icons :::::*/
+ 
++.message-icon,
++.alert-icon,
++.error-icon,
++.question-icon {
++  width: 64px;
++  height: 64px;
++  margin: 6px;
++  -moz-margin-end: 20px;
++}
++
+ .message-icon {
+-  list-style-image: url("moz-icon://stock/gtk-dialog-info?size=dialog");
++  list-style-image: url("chrome://global/skin/icons/information-64.png");
+ }
+ 
+ .alert-icon {
+-  list-style-image: url("moz-icon://stock/gtk-dialog-warning?size=dialog");
++  list-style-image: url("chrome://global/skin/icons/warning-64.png");
+ }
+ 
+ .error-icon {
+-  list-style-image: url("moz-icon://stock/gtk-dialog-error?size=dialog");
++  list-style-image: url("chrome://global/skin/icons/error-64.png");
+ }
+ 
+ .question-icon {
+-  list-style-image: url("moz-icon://stock/gtk-dialog-question?size=dialog");
+-}
+-
+-.authentication-icon {
+-  list-style-image: url("chrome://global/skin/icons/Authentication.png");
++  list-style-image: url("chrome://global/skin/icons/question-64.png");
+ }
+ 
+ /* ::::: iframe ::::: */
+@@ -94,72 +102,33 @@ iframe {
+ /* ::::: statusbar ::::: */
+ 
+ statusbar {
++  min-width: 1px; /* DON'T DELETE!
++  Prevents hiding of scrollbars in browser when window is made smaller.*/
++  min-height: 15px !important;
++  margin: 0px !important;
++  /* need to use -moz-padding-end when/if bug 631729 gets fixed: */
++  padding: 0px 16px 1px 1px;
+   -moz-appearance: statusbar;
+-  border-top: 1px solid ThreeDLightShadow;
+-  border-left: 1px solid ThreeDShadow;
+-  border-right: 1px solid ThreeDHighlight;
+-  border-bottom: 1px solid ThreeDHighlight;
+-  background-color: -moz-Dialog;
+-  min-height: 22px;
++  text-shadow: rgba(255, 255, 255, 0.4) 0 1px;
+ }
+ 
+ statusbarpanel {
+-  -moz-appearance: statusbarpanel;
+   -moz-box-align: center;
+   -moz-box-pack: center;
+-  border-left: 1px solid ThreeDHighlight;
+-  border-top: 1px solid ThreeDHighlight;
+-  border-right: 1px solid ThreeDShadow;
+-  border-bottom: 1px solid ThreeDShadow;
+   padding: 0 4px;
+ }
+ 
+-.statusbar-resizerpanel {
+-  -moz-box-align: end;
+-  -moz-box-pack: end;
+-  -moz-appearance: resizerpanel;
+-  padding: 0;
+-  border: none;
+-}
+-
+-.statusbarpanel-iconic,
+-.statusbarpanel-iconic-text,
+-.statusbarpanel-menu-iconic {
+-  padding: 0 1px;
+-}
+-
+-/* XXXBlake yeah, shoot me -- these don't belong here.  I'll move them later. */
+-
+-sidebarheader {
+-  height: 25px;
+-  background-color: -moz-Dialog;
+-}
+-
+-sidebarheader > label {
+-  -moz-padding-start: 4px;
+-}
+-
+-.toolbar-focustarget {
+-  -moz-user-focus: ignore !important;
+-}
+-
+-toolbar[mode="text"] .toolbarbutton-text {
+-  padding: 0 !important;
+-  margin: 3px 5px !important;
++.statusbarpanel-iconic {
++  padding: 0px;
+ }    
+ 
+ /* ::::: miscellaneous formatting ::::: */
+ 
+ :root:-moz-lwtheme,
+-[lwthemefooter="true"],
+-statusbarpanel:-moz-lwtheme {
++[lwthemefooter="true"] {
+   -moz-appearance: none;
+ }
+ 
+-sidebarheader:-moz-lwtheme {
+-  background: none;
+-}
+-
+ :root:-moz-lwtheme-darktext {
+   text-shadow: 0 -0.5px 1.5px white;
+ }
+@@ -168,6 +137,13 @@ sidebarheader:-moz-lwtheme {
+   text-shadow: 1px 1px 1.5px black;
+ }
+ 
++statusbar:-moz-lwtheme {
++  -moz-appearance: none;
++  background: none;
++  border-style: none;
++  text-shadow: inherit;
++}
++
+ .inset {
+   border: 1px solid ThreeDShadow;
+   border-right-color: ThreeDHighlight;
+@@ -196,24 +172,18 @@ separator.thin[orient="vertical"] {
+ }
+ 
+ separator.groove:not([orient="vertical"]) {
+-  border-top: 1px solid ThreeDShadow;
+-  border-bottom: 1px solid ThreeDHighlight;
++  border-top: 1px solid #A3A3A3;
+   height: 0;
+   margin-top: 0.4em;
+   margin-bottom: 0.4em;
+ }
+ separator.groove[orient="vertical"] {
+-  border-left: 1px solid ThreeDShadow;
+-  border-right: 1px solid ThreeDHighlight;
++  border-left: 1px solid #A3A3A3;
+   width: 0;
+   margin-left: 0.4em;
+   margin-right: 0.4em;
+ }
+     
+-.small-margin {
+-  margin: 1px 2px;
+-}
+-    
+ .plain {
+   -moz-appearance: none;
+   margin: 0 !important;
+@@ -224,14 +194,10 @@ separator.groove[orient="vertical"] {
+ description,
+ label {
+   cursor: default;
+-  margin-top: 1px;
+-  margin-bottom: 2px;
+-  -moz-margin-start: 6px;
+-  -moz-margin-end: 5px;
+ }
+ 
+-description {
+-  margin-bottom: 4px;
++label {
++  margin: 2px 6px;
+ }
+ 
+ label[disabled="true"] {
+@@ -242,7 +208,12 @@ label[disabled="true"] {
+   margin: 0;
+ }
+ 
++description {
++  margin-bottom: 4px;
++}
++
+ .header {
++  margin-bottom: 6px;
+   font-weight: bold;
+ }
+ 
+@@ -268,7 +239,6 @@ label[disabled="true"] {
+ 
+ .text-link {
+   color: -moz-nativehyperlinktext;
+-  border: 1px solid transparent;
+   cursor: pointer;
+ }
+ 
+@@ -276,13 +246,42 @@ label[disabled="true"] {
+   text-decoration: underline;
+ }
+   
+-.text-link:focus {
+-  border: 1px dotted -moz-DialogText;
++.text-link:-moz-focusring {
++  box-shadow: @focusRingShadow@;
++}
++
++.toolbar-focustarget {
++  -moz-user-focus: ignore !important;
+ }
+ 
+ notification > button {
+-  margin-top: 0;
+-  margin-bottom: 0;
++  margin: 0 3px;
++  padding: 1px 10px;
++  min-width: 60px;
++  min-height: 16px;
++  -moz-appearance: none;
++  border-radius: 10000px;
++  border: @roundButtonBorder@;
++  text-shadow: @loweredShadow@;
++  background: @roundButtonBackground@;
++  box-shadow: @roundButtonShadow@;
++}
++
++notification > button:active:hover {
++  background: @roundButtonPressedBackground@;
++  box-shadow: @roundButtonPressedShadow@;
++}
++
++notification > button:-moz-focusring {
++  box-shadow: @focusRingShadow@, @roundButtonShadow@;
++}
++
++notification > button:active:hover:-moz-focusring {
++  box-shadow: @focusRingShadow@, @roundButtonPressedShadow@;
++}
++
++notification > button > .button-box > .button-text {
++  margin: 0 !important;
+ }
+ 
+ /* :::::: autoscroll popup ::::: */
+@@ -297,6 +296,7 @@ notification > button {
+   background-color: transparent;
+   background-position: right top;
+   -moz-appearance: none;
++  -moz-window-shadow: none;
+ }
+ 
+ .autoscroller[scrolldir="NS"] {
+@@ -307,18 +307,61 @@ notification > button {
+   background-position: right bottom;
+ }
+ 
++/* autorepeatbuttons in menus */
++
++.popup-internal-box > autorepeatbutton {
++  height: 15px;
++  position: relative;
++  /* Here we're using a little magic.
++   * The arrow button is supposed to overlay the scrollbox, blocking
++   * everything under it from reaching the screen. However, the menu background
++   * is slightly transparent, so how can we block something completely without
++   * messing up the transparency? It's easy: The native theming of the
++   * "menuitem" appearance uses CGContextClearRect before drawing, which
++   * clears everything under it.
++   * Without help from native theming this effect wouldn't be achievable.
++   */
++  -moz-appearance: menuitem;
++}
++
++.popup-internal-box > .autorepeatbutton-up {
++  margin-bottom: -15px;
++}
++
++.popup-internal-box > .autorepeatbutton-down {
++  margin-top: -15px;
++}
++
++.popup-internal-box > autorepeatbutton[disabled="true"] {
++  visibility: collapse;
++}
++
+ /* :::::: Close button icons ::::: */
+ 
+ .close-icon {
+-  background-image: -moz-image-rect(url("chrome://global/skin/icons/close.svg"), 0, 16, 16, 0);
+-  background-position: center center;
+-  background-repeat: no-repeat;
++  list-style-image: url("chrome://global/skin/icons/close.png");
++  -moz-image-region: rect(0, 16px, 16px, 0);
+ }
+ 
+ .close-icon:hover {
+-  background-image: -moz-image-rect(url("chrome://global/skin/icons/close.svg"), 0, 32, 16, 16);
++  -moz-image-region: rect(0, 32px, 16px, 16px);
+ }
+ 
+ .close-icon:hover:active {
+-  background-image: -moz-image-rect(url("chrome://global/skin/icons/close.svg"), 0, 48, 16, 32);
++  -moz-image-region: rect(0, 48px, 16px, 32px);
++}
++
++@media (min-resolution: 2dppx) {
++  .close-icon {
++    list-style-image: url("chrome://global/skin/icons/close@2x.png");
++    -moz-image-region: rect(0, 32px, 32px, 0);
++  }
++
++  .close-icon:hover {
++    -moz-image-region: rect(0, 64px, 32px, 32px);
++  }
++
++  .close-icon:hover:active {
++    -moz-image-region: rect(0, 96px, 32px, 64px);
++  }
+ }
