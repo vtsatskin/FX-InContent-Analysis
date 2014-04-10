@@ -314,6 +314,10 @@ var data = {
       description: "Locale specific styles. Imported by global.css.",
       osDependant: false,
     },
+    "chrome://browser/skin/preferences/preferences.css": {
+      description: "Styles for modal pop-out preferences",
+      osDependant: true,
+    },
   }
 };
 
