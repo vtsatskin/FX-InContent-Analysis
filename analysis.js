@@ -326,6 +326,10 @@ var data = {
       description: "Styling for applications panel in preferences. Included as a stylehseet instead of CSS import.",
       osDependant: true,
     },
+    "chrome://browser/content/preferences/handlers.css": {
+      description: "More applications panel styling. Should probably be merged into applications.css",
+      osDependant: false,
+    },
   }
 };
 
