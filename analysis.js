@@ -322,6 +322,10 @@ var data = {
       description: "In-content preferences UI stylesheet",
       osDependant: true,
     },
+    "chrome://browser/skin/preferences/applications.css": {
+      description: "Styling for applications panel in preferences. Included as a stylehseet instead of CSS import.",
+      osDependant: true,
+    },
   }
 };
 
