@@ -318,6 +318,10 @@ var data = {
       description: "Styles for modal pop-out preferences",
       osDependant: true,
     },
+    "chrome://browser/skin/preferences/in-content/preferences.css": {
+      description: "In-content preferences UI stylesheet",
+      osDependant: true,
+    },
   }
 };
 
